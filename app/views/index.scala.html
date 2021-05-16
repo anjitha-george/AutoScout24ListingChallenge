@@ -1,0 +1,90 @@
+@(averagePrice:scala.collection.mutable.Map[String, String],
+percentageMake:scala.collection.mutable.Map[String, Double],
+averagePriceMostContacted:String,
+mostContactedListingPerMonth:scala.collection.mutable.Map[(Int,Int), scala.collection.mutable.ListBuffer[scala.collection.mutable.ListBuffer[Any]]])
+
+@main("Auto Scout Car Listing Report") {
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+</style>
+<a href="/upload">Go to File Upload</a>
+<h2>Average Listing Selling Price per Seller Type</h2>
+<table>
+    <tr>
+        <th>Seller Type</th>
+        <th>Average in Euro</th>
+    </tr>
+    @if(averagePrice != null) {
+    @for((key,value) <- averagePrice) {
+    <tr>
+        <td>@key</td>
+        <td>@value</td>
+    </tr>
+    }
+    }
+</table>
+
+<h2>Distribution (in percent) of available cars by Make</h2>
+<table>
+    <tr>
+        <th>Make</th>
+        <th>Distribution</th>
+    </tr>
+    @if(percentageMake != null) {
+    @for((key,value) <- percentageMake) {
+    <tr>
+        <td>@key</td>
+        <td>@value%</td>
+    </tr>
+    }
+    }
+</table>
+
+<h2>Average price of the 30% most contacted listings</h2>
+<table>
+    <tr>
+        <th>Average Price</th>
+    </tr>
+    @if(averagePriceMostContacted != null) {
+    <tr>
+        <td>@averagePriceMostContacted</td>
+    </tr>
+    }
+</table>
+
+<h2>The Top 5 most contacted listings per Month</h2>
+@if(mostContactedListingPerMonth != null) {
+@for((key,value) <- mostContactedListingPerMonth) {
+<b>Month: @key._1.@key._2</b>
+<br>
+<br>
+<table>
+    <tr>
+        <th>Ranking</th>
+        <th>Listing Id</th>
+        <th>Make</th>
+        <th>Selling Price</th>
+        <th>Mileage</th>
+        <th>Total Amount of contacts</th>
+    </tr>
+    @for((row,index)<-value.zipWithIndex){
+    <tr>
+        <td>@{index+1}</td>
+        <td>@row(1)</td>
+        <td>@row(2)</td>
+        <td>@row(3)</td>
+        <td>@row(4)KM</td>
+        <td>@row(0)</td>
+    </tr>
+    }
+</table>
+<br>
+}
+}
+}

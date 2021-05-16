@@ -1,0 +1,18 @@
+@(message:String)
+@helper.form(action = routes.UploadController.upload, Symbol("enctype") -> "multipart/form-data"){
+<html>
+<title>Upload Form</title>
+<a href="/">Go to Report</a>
+<br>
+<br>
+<b><label>Listing : </label></b><input type="file" name="Listing">
+<br>
+<br>
+<b><label>Contact : </label></b><input type="file" name="Contact">
+<br>
+<p>
+    <input type="submit">
+</p>
+<p>@message</p>
+</html>
+}
