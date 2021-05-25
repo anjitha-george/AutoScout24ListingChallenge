@@ -18,15 +18,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
     //Read Contact csv to list of Objects
     val contactsList: List[Contact] = Contact.readCsv("public/contacts.csv")
-
-    //currency formatting
-    val formatterCurrency = new DecimalFormat("€ ###,###.-")
-    val dfs = new DecimalFormatSymbols
-    dfs.setCurrencySymbol("€")
-    dfs.setGroupingSeparator('.')
-    dfs.setDecimalSeparator(',')
-    formatterCurrency.setDecimalFormatSymbols(dfs)
-
+    
     val aggregates:Aggregates = new Aggregates(listingList,contactsList)
     val averagePricePerSellerType = aggregates.averagePricePerSellerType
     val listingPercentPerMake = aggregates.listingPercentPerMake
