@@ -1,4 +1,4 @@
-# Coding Challenge: AutoScout24 Listing Report
+# Car Listing Project
 ## Tech Stack
 1.	Language : Scala
 2.	Framework: Play framework
